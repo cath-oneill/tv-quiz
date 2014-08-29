@@ -49,7 +49,7 @@ var Quizzy = (function() {
 
 	function addHighScore(username, score) {
 		highScores[9] = {"Username" : username, "Score" : score};
-		highScores = highScores.sort(function(a,b) { return parseFloat(b.score) - parseFloat(a.score) } );
+		highScores = highScores.sort(function(a,b) { return parseFloat(b.Score) - parseFloat(a.Score) } );
 		QuizzyData.updateLeaderboard(highScores);
 	}
 

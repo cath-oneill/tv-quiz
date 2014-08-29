@@ -48,8 +48,9 @@ var QuizzyData = (function(){
 		return highScores
 	}
 
-	function updateHighScores() {
-		highScoreFireData.set(highScores);
+	function updateHighScores(highScoreArrayFromController) {
+		highScoreFireData.set(highScoreArrayFromController);
+		console.log(highScoreArrayFromController);
 	}
 
 	return {
