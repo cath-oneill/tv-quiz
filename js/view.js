@@ -47,14 +47,15 @@ var QuizzyUI = (function(){
 		$("#leaderboard").append($view).show();		
 	};
 
-	function CreateFeedback(correct, score, total) {
+	function CreateFeedback(correct, score, total, percent) {
 		var message, preppedTemplate, compiledHTML, $view;
 		message = correct ? "Great job!" : "Wrong! Better get watching.";
 		preppedTemplate = _.template(Templates.feedback);
 		compiledHTML = preppedTemplate({
 			feedback: message,
 			score: score,
-			total: total
+			total: total,
+			percent: percent
 		})
 		$view = $(compiledHTML);
 		$view.find('#next').on('click', function(){

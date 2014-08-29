@@ -6,10 +6,7 @@ var QuizzyData = (function(){
 	var currentQ, quizData, highScores;
 	
 	function getCurrentQ(number) {
-		currentQ = quizData[number];
-		// this.question = currentQ.question;
-		// this.answer   = currentQ.answer;
-		return currentQ;
+		return quizData[number];
 	};
 
 	function getData(callback) {
