@@ -27,6 +27,7 @@ var QuizzyUI = (function(){
 
 	function FinalScore(response, score, total) {
 		var preppedTemplate, compiledHtml, $view;
+		console.log("final score", response, score, total)
 		$quizContainer.html("");
 		preppedTemplate = _.template(Templates.end);
 		compiledHTML = preppedTemplate({
@@ -35,10 +36,19 @@ var QuizzyUI = (function(){
 			total: total
 		})
 		$view = $(compiledHTML);
-
-		$quizContainer.append($view);
-		
+		$quizContainer.append($view);	
 	}
+
+
+	function CreateLeaderboard(highScores) {
+		var preppedTemplate, compiledHtml, $view;
+		preppedTemplate = _.template(Templates.leaderBoard);
+		compiledHTML = preppedTemplate({
+			highScores: highScores,
+		})
+		$view = $(compiledHTML);
+		$("#leaderboard").append($view);		
+	};
 
 	function CreateFeedback(correct, score, total) {
 		var message, preppedTemplate, compiledHTML, $view;
@@ -61,11 +71,21 @@ var QuizzyUI = (function(){
 		return name;
 	}
 
+	function end(response, score, total, highScores) {
+		FinalScore(response, score, total);
+		setTimeout(CreateLeaderboard(highScores), 500);
+	}
+
+	$('#start').on('click', function() {
+		$('#startpage').hide();
+		Quizzy.start();
+	})
+
 
 	return {
 		question: CreateQuestion,
 		start: Start,
-		end: FinalScore,
+		end: end,
 		feedback: CreateFeedback,
 		getUsername: getUsername
 	}

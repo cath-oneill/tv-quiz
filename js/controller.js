@@ -32,6 +32,8 @@ var Quizzy = (function() {
 
 	function startApplication() {
 		QuizzyData.start();
+		score = 0;
+		currentIndex = 0;
 	}
 
 	function continueStart() {
@@ -62,7 +64,6 @@ var Quizzy = (function() {
 	function feedback(response, score, total, percent) {
 		if (currentIndex + 1 === length) {
 			highScores = QuizzyData.getLeaderboard();
-			console.log(highScores);
 			if (score >= highScoreLimit()) {
 				user = QuizzyUI.getUsername();
 				addHighScore(user, score);

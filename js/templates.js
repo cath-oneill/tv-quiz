@@ -28,14 +28,22 @@ var Templates = (function(){
 	var finalScore = [
 		'<div class="row panel text-centered">',
 		'<h2>Your Final Score: <%= score %>%</h2>',
-		'<img src="images/wtf-is-wallace.jpg">',
 		'</div>'
 	].join("\n")
+
+	var leaderBoard = [
+		'<div class="row panel">',
+		'<% for (var i=0; i < highScores.length; i++) { %>',
+		'<p><%= highScores[i]["Username"] %> -- <%= highScores[i]["Score"] %>',
+		'<% } %>',
+		'</div>'
+	].join("\n");
 
 	return {
 		question: question,
 		feedback: feedback,
-		end: finalScore
+		end: finalScore,
+		leaderBoard: leaderBoard
 	}
 
 })();
