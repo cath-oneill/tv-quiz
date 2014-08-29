@@ -19,7 +19,8 @@ var Quizzy = (function() {
 			QuizzyData.incorrectAnswer(random[currentIndex]);
 		}
 		total = (currentIndex+ 1)*10;
-		feedback(response, score, total);
+		percent = currentQ.correct * 100 / (currentQ.incorrect + currentQ.correct)
+		feedback(response, score, total, percent);
 	};
 
 	var nextQuestion = function() {
@@ -33,11 +34,8 @@ var Quizzy = (function() {
 	}
 
 	function continueStart() {
-		console.log('in data loaded');
 		length = QuizzyData.length();
-		console.log(length);
 		random = _.range(length); 
-		console.log(random);
 		shuffle(random);
 		currentQ = QuizzyData.current(random[currentIndex]); 
 		QuizzyUI.question(currentQ);
@@ -52,12 +50,12 @@ var Quizzy = (function() {
 	  return arr;
 	}
 
-	function feedback(response, score, total) {
+	function feedback(response, score, total, percent) {
 		if (currentIndex + 1 === length) {
 			QuizzyData.end();
 			QuizzyUI.end(response, score, total);
 		} else {
-			QuizzyUI.feedback(response, score, total);
+			QuizzyUI.feedback(response, score, total, percent);
 		}
 
 	}
