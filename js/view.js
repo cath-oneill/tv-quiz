@@ -13,7 +13,7 @@ var QuizzyUI = (function(){
 			D: qObject.D
 		});
 		var $view = $(compiledHtml);
-		$view.find('.photo').on('click', function() {
+		$view.find('.photo').one('click', function() {
 			answer = $(this).attr('id');
 			Quizzy.check(answer);
 		});

@@ -31,7 +31,7 @@ var Quizzy = (function() {
 	}
 
 	function startApplication() {
-		QuizzyData.start(function() {
+		QuizzyData.load(function() {
 			length = QuizzyData.length();
 			random = _.range(length); 
 			shuffle(random);

@@ -9,7 +9,7 @@ var QuizzyData = (function(){
 		return quizData[number];
 	};
 
-	function getData(callback) {
+	function loadData(callback) {
 		questionFireData.on('value', function (snapshot) {
   			quizData = snapshot.val();
   			if(callback){
@@ -57,7 +57,7 @@ var QuizzyData = (function(){
 		length: length,
 		correctAnswer: incrementCorrect,
 		incorrectAnswer: incrementIncorrect,
-		start: getData,
+		load: loadData,
 		save: saveData,
 		getLeaderboard: getHighScores,
 		updateLeaderboard: updateHighScores
