@@ -12,11 +12,7 @@ var QuizzyData = (function(){
 	function loadData(callback) {
 		questionFireData.on('value', function (snapshot) {
   			quizData = snapshot.val();
-  			if(callback){
-  				callback();
-  			}
-  			
-			// Quizzy.afterData();
+  			if(callback){callback();}
 		}, function (errorObject) {
   			console.log('The read failed: ' + errorObject.code);
 		});

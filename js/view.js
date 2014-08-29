@@ -17,12 +17,11 @@ var QuizzyUI = (function(){
 			answer = $(this).attr('id');
 			Quizzy.check(answer);
 		});
-
 		$quizContainer.append($view);
 	}
 
 
-	function FinalScore(response, score, total) {
+	function FinalScore(response, score, total, callback) {
 		var preppedTemplate, compiledHtml, $view;
 		console.log("final score", response, score, total)
 		$quizContainer.html("");
@@ -71,7 +70,7 @@ var QuizzyUI = (function(){
 
 	function end(response, score, total, highScores) {
 		FinalScore(response, score, total);
-		setTimeout(CreateLeaderboard(highScores), 500);
+		CreateLeaderboard(highScores);
 	}
 
 	$('#start').on('click', function() {

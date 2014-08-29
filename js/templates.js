@@ -27,12 +27,12 @@ var Templates = (function(){
 
 	var finalScore = [
 		'<div class="row panel text-centered">',
-		'<h2>Your Final Score: <%= score %>%</h2>',
+		'<h2 class="columns small-12">Your Final Score: <%= score %>%</h2>',
 		'</div>'
 	].join("\n")
 
 	var leaderBoard = [
-		'<div class="row">',
+		'<div class="columns small-12">',
 		'<% for (var i=0; i < highScores.length; i++) { %>',
 		'<p><%= highScores[i]["Username"] %> -- <%= highScores[i]["Score"] %>',
 		'<% } %>',
