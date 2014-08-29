@@ -6,7 +6,8 @@ var Quizzy = (function() {
 		score = 0, 
 		random, 
 		length,
-		currentIndex = 0;
+		currentIndex = 0,
+		highScores;
 
 	var checkAnswer = function(input) {
 		var response, total;
@@ -42,7 +43,15 @@ var Quizzy = (function() {
 		QuizzyUI.start();
 	}
 
+	function highScoreLimit() {
+		return highScores[9]["Score"];
+	}
 
+	function addHighScore(username, score) {
+		highScores[9] = {"Username" : username, "Score" : score};
+		highScores = highScores.sort(function(a,b) { return parseFloat(b.score) - parseFloat(a.score) } );
+		QuizzyData.updateLeaderboard(highScores);
+	}
 
 	function shuffle(arr)
 	{
@@ -52,8 +61,14 @@ var Quizzy = (function() {
 
 	function feedback(response, score, total, percent) {
 		if (currentIndex + 1 === length) {
+			highScores = QuizzyData.getLeaderboard();
+			console.log(highScores);
+			if (score >= highScoreLimit()) {
+				user = QuizzyUI.getUsername();
+				addHighScore(user, score);
+			} 
 			QuizzyData.end();
-			QuizzyUI.end(response, score, total);
+			QuizzyUI.end(response, score, total, highScores);
 		} else {
 			QuizzyUI.feedback(response, score, total, percent);
 		}

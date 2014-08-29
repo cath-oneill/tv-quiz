@@ -56,13 +56,18 @@ var QuizzyUI = (function(){
 		$quizContainer.append($view);
 	}
 
+	function getUsername() {
+		var name = prompt("CONGRATULATIONS! You are on the high score leaderboard! Enter your name!");
+		return name;
+	}
 
 
 	return {
 		question: CreateQuestion,
 		start: Start,
 		end: FinalScore,
-		feedback: CreateFeedback
+		feedback: CreateFeedback,
+		getUsername: getUsername
 	}
 
 

@@ -1,8 +1,9 @@
 var QuizzyData = (function(){
 
 	var questionFireData = new Firebase("https://wirequiz.firebaseio.com/questions");
+	var highScoreFireData = new Firebase("https://wirequiz.firebaseio.com/highScores");
 
-	var currentQ, quizData;
+	var currentQ, quizData, highScores;
 	
 	function getCurrentQ(number) {
 		currentQ = quizData[number];
@@ -18,26 +19,38 @@ var QuizzyData = (function(){
 		}, function (errorObject) {
   			console.log('The read failed: ' + errorObject.code);
 		});
+
+		highScoreFireData.on('value', function(snapshot) {
+			highScores = snapshot.val();
+			console.log(highScores);
+		}, function (errorObject) {
+			console.log("Error loading high scores:" + errorObject.code);
+		});
 	}
 
 	function saveData() {
-		questionFireData.update(quizData);
+		questionFireData.set(quizData);
 	}
 
 	function incrementCorrect(index) {
 		quizData[index].correct += 1;
-		console.log(quizData[index].correct, quizData[index].incorrect);
 	}
 
 	function incrementIncorrect(index) {
 		quizData[index].incorrect += 1;
-		console.log(quizData[index].correct, quizData[index].incorrect);
 	}
 
 	function length() {
 		return quizData.length;
 	}
 
+	function getHighScores() {
+		return highScores
+	}
+
+	function updateHighScores() {
+		highScoreFireData.set(highScores);
+	}
 
 	return {
 		current: getCurrentQ,
@@ -45,7 +58,9 @@ var QuizzyData = (function(){
 		correctAnswer: incrementCorrect,
 		incorrectAnswer: incrementIncorrect,
 		start: getData,
-		end: saveData
+		end: saveData,
+		getLeaderboard: getHighScores,
+		updateLeaderboard: updateHighScores
 	};
 
 

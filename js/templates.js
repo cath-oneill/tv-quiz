@@ -20,7 +20,7 @@ var Templates = (function(){
 		'<div class="row panel">',
 	    '<h3> <%= feedback %> </h3>',
 	    '<h4>Current Score: <%= score %>/<%= total %></h4>',
-	    '<p>Average % correct: <%= percent %></p>',
+	    '<p>On average, players get this question correct <%= percent %>% of the time.</p>',
 	    '<button id="next">NEXT</button>',
 	    "</div>"
 	].join("\n");
