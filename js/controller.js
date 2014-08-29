@@ -4,7 +4,8 @@ var Quizzy = (function() {
 
 	var currentQ, 
 		score = 0, 
-		random = _.range(QuizzyData.length), 
+		random, 
+		length,
 		currentIndex = 0;
 
 	var checkAnswer = function(input) {
@@ -28,11 +29,20 @@ var Quizzy = (function() {
 	}
 
 	function startApplication() {
-		QuizzyUI.start();
+		QuizzyData.start();
+	}
+
+	function continueStart() {
+		console.log('in data loaded');
+		length = QuizzyData.length();
+		random = _.range(length); 
 		shuffle(random);
 		currentQ = QuizzyData.current(random[currentIndex]); 
 		QuizzyUI.question(currentQ);
+		QuizzyUI.start();
 	}
+
+
 
 	function shuffle(arr)
 	{
@@ -53,7 +63,8 @@ var Quizzy = (function() {
 	return {
 		check: checkAnswer,
 		next: nextQuestion,
-		start: startApplication
+		start: startApplication,
+		afterData: continueStart
 	}
 
 })();
