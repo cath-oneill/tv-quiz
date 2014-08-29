@@ -1,4 +1,7 @@
 var QuizzyData = (function(){
+
+	var myFirebaseRef = new Firebase("https://wirequiz.firebaseio.com/");
+
 	var quizData = {
 		quizTitle: "The Wire",
 		questions: [
@@ -117,11 +120,23 @@ var QuizzyData = (function(){
 		return currentQ;
 	};
 
+	function incrementCorrect() {
+		quizData.questions[currentQ.number].correct += 1;
+		console.log(quizData.questions[currentQ.number].correct, quizData.questions[currentQ.number].incorrect);
+	}
+
+	function incrementIncorrect() {
+		quizData.questions[currentQ.number].incorrect += 1;
+		console.log(quizData.questions[currentQ.number].correct, quizData.questions[currentQ.number].incorrect);
+	}
+
 
 	return {
 		current: getCurrentQ,
 		title: quizData.quizTitle,
-		length: quizData.questions.length
+		length: quizData.questions.length,
+		correctAnswer: incrementCorrect,
+		incorrectAnswer: incrementIncorrect
 	};
 
 

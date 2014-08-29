@@ -12,8 +12,10 @@ var Quizzy = (function() {
 		if (input === currentQ.answer) {
 			response = true;
 			score += 10;
+			QuizzyData.correctAnswer();
 		} else {
 			response = false;
+			QuizzyData.incorrectAnswer();
 		}
 		total = (currentIndex+ 1)*10;
 		feedback(response, score, total);
