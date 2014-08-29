@@ -21,7 +21,7 @@ var Quizzy = (function() {
 		}
 		total = (currentIndex+ 1)*10;
 		percent = currentQ.correct * 100 / (currentQ.incorrect + currentQ.correct)
-		feedback(response, score, total, percent);
+		endOfTurn(response, score, total, percent);
 	};
 
 	var nextQuestion = function() {
@@ -29,8 +29,6 @@ var Quizzy = (function() {
 		currentQ = QuizzyData.current(random[currentIndex]);
 		QuizzyUI.question(currentQ);
 	}
-
-
 
 	function startApplication() {
 		QuizzyData.start(function() {
@@ -41,9 +39,7 @@ var Quizzy = (function() {
 			QuizzyUI.question(currentQ);
 		});
 		score = 0;
-		currentIndex = 0;
-		
-
+		currentIndex = 0;		
 	}
 
 	function highScoreLimit() {
@@ -62,14 +58,14 @@ var Quizzy = (function() {
 	  return arr;
 	}
 
-	function feedback(response, score, total, percent) {
+	function endOfTurn(response, score, total, percent) {
 		if (currentIndex + 1 === length) {
 			highScores = QuizzyData.getLeaderboard();
 			if (score >= highScoreLimit()) {
 				user = QuizzyUI.getUsername();
 				addHighScore(user, score);
 			} 
-			QuizzyData.end();
+			QuizzyData.save();
 			QuizzyUI.end(response, score, total, highScores);
 		} else {
 			QuizzyUI.feedback(response, score, total, percent);

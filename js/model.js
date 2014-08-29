@@ -61,7 +61,7 @@ var QuizzyData = (function(){
 		correctAnswer: incrementCorrect,
 		incorrectAnswer: incrementIncorrect,
 		start: getData,
-		end: saveData,
+		save: saveData,
 		getLeaderboard: getHighScores,
 		updateLeaderboard: updateHighScores
 	};
