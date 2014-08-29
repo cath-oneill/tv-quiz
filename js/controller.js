@@ -13,10 +13,10 @@ var Quizzy = (function() {
 		if (input === currentQ.answer) {
 			response = true;
 			score += 10;
-			QuizzyData.correctAnswer();
+			QuizzyData.correctAnswer(random[currentIndex]);
 		} else {
 			response = false;
-			QuizzyData.incorrectAnswer();
+			QuizzyData.incorrectAnswer(random[currentIndex]);
 		}
 		total = (currentIndex+ 1)*10;
 		feedback(response, score, total);
@@ -35,7 +35,9 @@ var Quizzy = (function() {
 	function continueStart() {
 		console.log('in data loaded');
 		length = QuizzyData.length();
+		console.log(length);
 		random = _.range(length); 
+		console.log(random);
 		shuffle(random);
 		currentQ = QuizzyData.current(random[currentIndex]); 
 		QuizzyUI.question(currentQ);
@@ -51,7 +53,8 @@ var Quizzy = (function() {
 	}
 
 	function feedback(response, score, total) {
-		if (currentIndex + 1 === QuizzyData.length) {
+		if (currentIndex + 1 === length) {
+			QuizzyData.end();
 			QuizzyUI.end(response, score, total);
 		} else {
 			QuizzyUI.feedback(response, score, total);

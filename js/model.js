@@ -1,20 +1,18 @@
 var QuizzyData = (function(){
 
-	var ref = new Firebase("https://wirequiz.firebaseio.com/questions");
+	var questionFireData = new Firebase("https://wirequiz.firebaseio.com/questions");
 
 	var currentQ, quizData;
 	
 	function getCurrentQ(number) {
 		currentQ = quizData[number];
-		currentQ.number = number;
-		this.question = currentQ.question;
-		this.answer   = currentQ.answer;
-		this.number = number;
+		// this.question = currentQ.question;
+		// this.answer   = currentQ.answer;
 		return currentQ;
 	};
 
 	function getData() {
-		ref.on('value', function (snapshot) {
+		questionFireData.on('value', function (snapshot) {
   			quizData = snapshot.val();
 			Quizzy.afterData();
 		}, function (errorObject) {
@@ -22,18 +20,18 @@ var QuizzyData = (function(){
 		});
 	}
 
-	function getQuestion(number) {
-
+	function saveData() {
+		questionFireData.update(quizData);
 	}
 
-	function incrementCorrect() {
-		quizData[currentQ.number].correct += 1;
-		console.log(quizData[currentQ.number].correct, quizData[currentQ.number].incorrect);
+	function incrementCorrect(index) {
+		quizData[index].correct += 1;
+		console.log(quizData[index].correct, quizData[index].incorrect);
 	}
 
-	function incrementIncorrect() {
-		quizData[currentQ.number].incorrect += 1;
-		console.log(quizData[currentQ.number].correct, quizData[currentQ.number].incorrect);
+	function incrementIncorrect(index) {
+		quizData[index].incorrect += 1;
+		console.log(quizData[index].correct, quizData[index].incorrect);
 	}
 
 	function length() {
@@ -47,7 +45,7 @@ var QuizzyData = (function(){
 		correctAnswer: incrementCorrect,
 		incorrectAnswer: incrementIncorrect,
 		start: getData,
-		// end: saveData
+		end: saveData
 	};
 
 
