@@ -12,17 +12,20 @@ var QuizzyData = (function(){
 		return currentQ;
 	};
 
-	function getData() {
+	function getData(callback) {
 		questionFireData.on('value', function (snapshot) {
   			quizData = snapshot.val();
-			Quizzy.afterData();
+  			if(callback){
+  				callback();
+  			}
+  			
+			// Quizzy.afterData();
 		}, function (errorObject) {
   			console.log('The read failed: ' + errorObject.code);
 		});
 
 		highScoreFireData.on('value', function(snapshot) {
 			highScores = snapshot.val();
-			console.log(highScores);
 		}, function (errorObject) {
 			console.log("Error loading high scores:" + errorObject.code);
 		});
@@ -50,7 +53,6 @@ var QuizzyData = (function(){
 
 	function updateHighScores(highScoreArrayFromController) {
 		highScoreFireData.set(highScoreArrayFromController);
-		console.log(highScoreArrayFromController);
 	}
 
 	return {

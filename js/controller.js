@@ -30,19 +30,20 @@ var Quizzy = (function() {
 		QuizzyUI.question(currentQ);
 	}
 
+
+
 	function startApplication() {
-		QuizzyData.start();
+		QuizzyData.start(function() {
+			length = QuizzyData.length();
+			random = _.range(length); 
+			shuffle(random);
+			currentQ = QuizzyData.current(random[currentIndex]); 
+			QuizzyUI.question(currentQ);
+		});
 		score = 0;
 		currentIndex = 0;
-	}
+		
 
-	function continueStart() {
-		length = QuizzyData.length();
-		random = _.range(length); 
-		shuffle(random);
-		currentQ = QuizzyData.current(random[currentIndex]); 
-		QuizzyUI.question(currentQ);
-		QuizzyUI.start();
 	}
 
 	function highScoreLimit() {
@@ -81,7 +82,6 @@ var Quizzy = (function() {
 		check: checkAnswer,
 		next: nextQuestion,
 		start: startApplication,
-		afterData: continueStart
 	}
 
 })();

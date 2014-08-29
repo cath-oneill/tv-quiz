@@ -32,7 +32,7 @@ var Templates = (function(){
 	].join("\n")
 
 	var leaderBoard = [
-		'<div class="row panel">',
+		'<div class="row">',
 		'<% for (var i=0; i < highScores.length; i++) { %>',
 		'<p><%= highScores[i]["Username"] %> -- <%= highScores[i]["Score"] %>',
 		'<% } %>',

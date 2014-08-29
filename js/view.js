@@ -21,9 +21,6 @@ var QuizzyUI = (function(){
 		$quizContainer.append($view);
 	}
 
-	function Start() {
-		// $('#title').append('<h1>' + QuizzyData.title + '</h1>');
-	}
 
 	function FinalScore(response, score, total) {
 		var preppedTemplate, compiledHtml, $view;
@@ -47,7 +44,7 @@ var QuizzyUI = (function(){
 			highScores: highScores,
 		})
 		$view = $(compiledHTML);
-		$("#leaderboard").append($view);		
+		$("#leaderboard").append($view).show();		
 	};
 
 	function CreateFeedback(correct, score, total) {
@@ -84,7 +81,6 @@ var QuizzyUI = (function(){
 
 	return {
 		question: CreateQuestion,
-		start: Start,
 		end: end,
 		feedback: CreateFeedback,
 		getUsername: getUsername
