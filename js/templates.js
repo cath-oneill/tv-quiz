@@ -39,11 +39,23 @@ var Templates = (function(){
 		'</div>'
 	].join("\n");
 
+	var landingPageGrid = [
+		'<ul class="small-block-grid-2 large-block-grid-4">',
+		'<% for (var i=0; i < landingData.length; i++) { %>',
+  		'<li class="start-quiz" data-quiz="<%= landingData[i]["key"] %>"><img src="<%= landingData[i]["image"] %>"></li>',
+  		'<% } %>',
+		'</ul>'
+	].join('\n');
+
+	var landingPageNav = [].join('\n');
+
 	return {
 		question: question,
 		feedback: feedback,
 		end: finalScore,
-		leaderBoard: leaderBoard
+		leaderBoard: leaderBoard,
+		lpGrid: landingPageGrid,
+		lpNav: landingPageNav
 	}
 
 })();
