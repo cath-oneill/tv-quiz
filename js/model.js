@@ -1,7 +1,7 @@
 var QuizzyData = (function(){
 
-	var questionFireData = new Firebase("https://wirequiz.firebaseio.com/questions");
-	var highScoreFireData = new Firebase("https://wirequiz.firebaseio.com/highScores");
+	var questionFireData = new Firebase("https://wirequiz.firebaseio.com/quizzes/wire/questions");
+	var highScoreFireData = new Firebase("https://wirequiz.firebaseio.com/quizzes/wire/highScores");
 
 	var currentQ, quizData, highScores;
 	

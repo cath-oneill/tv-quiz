@@ -1,6 +1,15 @@
 var QuizzyUI = (function(){
 	var $quizContainer = $('#quiz-app');
 
+	function createHeaderView() {
+		var $img,
+			$header = $('header'),
+			$logo = $('#logo'); 
+		$img = $('<img>').attr('src', "images/wire_logo.jpg");
+		$logo.append($img);
+		$header.css('background', '#000201');
+	}
+
 	function CreateQuestionView(qObject) {
 		var preppedTemplate, compiledHtml, answer;
 		$quizContainer.html("");
@@ -20,6 +29,22 @@ var QuizzyUI = (function(){
 		$quizContainer.append($view);
 	}
 
+	function CreateFeedbackView(correct, score, total, percent) {
+		var message, preppedTemplate, compiledHTML, $view;
+		message = correct ? "Great job!" : "Wrong! Better get watching.";
+		preppedTemplate = _.template(Templates.feedback);
+		compiledHTML = preppedTemplate({
+			feedback: message,
+			score: score,
+			total: total,
+			percent: percent
+		})
+		$view = $(compiledHTML);
+		$view.find('#next').on('click', function(){
+			Quizzy.next();
+		})
+		$quizContainer.append($view);
+	}
 
 	function FinalScoreView(response, score, total, callback) {
 		var preppedTemplate, compiledHtml, $view;
@@ -46,22 +71,6 @@ var QuizzyUI = (function(){
 		$("#leaderboard").append($view).show();		
 	};
 
-	function CreateFeedbackView(correct, score, total, percent) {
-		var message, preppedTemplate, compiledHTML, $view;
-		message = correct ? "Great job!" : "Wrong! Better get watching.";
-		preppedTemplate = _.template(Templates.feedback);
-		compiledHTML = preppedTemplate({
-			feedback: message,
-			score: score,
-			total: total,
-			percent: percent
-		})
-		$view = $(compiledHTML);
-		$view.find('#next').on('click', function(){
-			Quizzy.next();
-		})
-		$quizContainer.append($view);
-	}
 
 	function getUsernameView() {
 		var name = prompt("CONGRATULATIONS! You are on the high score leaderboard! Enter your name!");
@@ -73,6 +82,10 @@ var QuizzyUI = (function(){
 		CreateLeaderboardView(highScores);
 	}
 
+	function start() {
+		createHeaderView();
+	}
+
 	$('#start').on('click', function() {
 		$('#startpage').hide();
 		Quizzy.start();
@@ -80,10 +93,11 @@ var QuizzyUI = (function(){
 
 
 	return {
+		start: start,
 		question: CreateQuestionView,
-		end: end,
 		feedback: CreateFeedbackView,
-		getUsername: getUsernameView
+		getUsername: getUsernameView,
+		end: end
 	}
 
 

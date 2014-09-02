@@ -2,9 +2,9 @@
 
 var Quizzy = (function() {
 
-	var currentQ, 
-		score = 0, 
-		random, 
+	var currentQ,
+		score = 0,
+		random,
 		length,
 		currentIndex = 0,
 		highScores;
@@ -20,7 +20,7 @@ var Quizzy = (function() {
 			QuizzyData.incorrectAnswer(random[currentIndex]);
 		}
 		total = (currentIndex+ 1)*10;
-		percent = currentQ.correct * 100 / (currentQ.incorrect + currentQ.correct)
+		percent = currentQ.correct * 100 / (currentQ.incorrect + currentQ.correct);
 		endOfTurn(response, score, total, percent);
 	};
 
@@ -28,18 +28,19 @@ var Quizzy = (function() {
 		currentIndex ++;
 		currentQ = QuizzyData.current(random[currentIndex]);
 		QuizzyUI.question(currentQ);
-	}
+	};
 
-	function startApplication() {
+	function startQuiz() {
+		QuizzyUI.start();
 		QuizzyData.load(function() {
 			length = QuizzyData.length();
-			random = _.range(length); 
+			random = _.range(length);
 			shuffle(random);
-			currentQ = QuizzyData.current(random[currentIndex]); 
+			currentQ = QuizzyData.current(random[currentIndex]);
 			QuizzyUI.question(currentQ);
 		});
 		score = 0;
-		currentIndex = 0;		
+		currentIndex = 0;
 	}
 
 	function highScoreLimit() {
@@ -76,7 +77,7 @@ var Quizzy = (function() {
 	return {
 		check: checkAnswer,
 		next: nextQuestion,
-		start: startApplication,
+		start: startQuiz,
 	}
 
 })();
