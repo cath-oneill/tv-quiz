@@ -1,7 +1,7 @@
 var QuizzyUI = (function(){
 	var $quizContainer = $('#quiz-app');
 
-	function CreateQuestion(qObject) {
+	function CreateQuestionView(qObject) {
 		var preppedTemplate, compiledHtml, answer;
 		$quizContainer.html("");
 		preppedTemplate = _.template(Templates.question);
@@ -21,7 +21,7 @@ var QuizzyUI = (function(){
 	}
 
 
-	function FinalScore(response, score, total, callback) {
+	function FinalScoreView(response, score, total, callback) {
 		var preppedTemplate, compiledHtml, $view;
 		console.log("final score", response, score, total)
 		$quizContainer.html("");
@@ -36,7 +36,7 @@ var QuizzyUI = (function(){
 	}
 
 
-	function CreateLeaderboard(highScores) {
+	function CreateLeaderboardView(highScores) {
 		var preppedTemplate, compiledHtml, $view;
 		preppedTemplate = _.template(Templates.leaderBoard);
 		compiledHTML = preppedTemplate({
@@ -46,7 +46,7 @@ var QuizzyUI = (function(){
 		$("#leaderboard").append($view).show();		
 	};
 
-	function CreateFeedback(correct, score, total, percent) {
+	function CreateFeedbackView(correct, score, total, percent) {
 		var message, preppedTemplate, compiledHTML, $view;
 		message = correct ? "Great job!" : "Wrong! Better get watching.";
 		preppedTemplate = _.template(Templates.feedback);
@@ -63,14 +63,14 @@ var QuizzyUI = (function(){
 		$quizContainer.append($view);
 	}
 
-	function getUsername() {
+	function getUsernameView() {
 		var name = prompt("CONGRATULATIONS! You are on the high score leaderboard! Enter your name!");
 		return name;
 	}
 
 	function end(response, score, total, highScores) {
-		FinalScore(response, score, total);
-		CreateLeaderboard(highScores);
+		FinalScoreView(response, score, total);
+		CreateLeaderboardView(highScores);
 	}
 
 	$('#start').on('click', function() {
@@ -80,10 +80,10 @@ var QuizzyUI = (function(){
 
 
 	return {
-		question: CreateQuestion,
+		question: CreateQuestionView,
 		end: end,
-		feedback: CreateFeedback,
-		getUsername: getUsername
+		feedback: CreateFeedbackView,
+		getUsername: getUsernameView
 	}
 
 
