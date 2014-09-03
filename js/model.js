@@ -1,51 +1,45 @@
 var QuizzyData = (function(){
 
-	var questionFireData = new Firebase("https://wirequiz.firebaseio.com/quizzes/wire/questions");
-	var highScoreFireData = new Firebase("https://wirequiz.firebaseio.com/quizzes/wire/highScores");
-
-	var currentQ, quizData, highScores;
+	var quizFireData,
+		currentQ, 
+		quizData;
 	
 	function getCurrentQ(number) {
-		return quizData[number];
+		return quizData.questions[number];
 	};
 
-	function loadData(callback) {
-		questionFireData.on('value', function (snapshot) {
+	function loadData(quizKey, callback) {
+		quizFireData = new Firebase("https://wirequiz.firebaseio.com/quizzes/" + quizKey);
+		quizFireData.on('value', function (snapshot) {
   			quizData = snapshot.val();
   			if(callback){callback();}
 		}, function (errorObject) {
   			console.log('The read failed: ' + errorObject.code);
 		});
-
-		highScoreFireData.on('value', function(snapshot) {
-			highScores = snapshot.val();
-		}, function (errorObject) {
-			console.log("Error loading high scores:" + errorObject.code);
-		});
 	}
 
 	function saveData() {
-		questionFireData.set(quizData);
+		quizFireData.set(quizData);
 	}
 
 	function incrementCorrect(index) {
-		quizData[index].correct += 1;
+		quizData.questions[index].correct += 1;
 	}
 
 	function incrementIncorrect(index) {
-		quizData[index].incorrect += 1;
+		quizData.questions[index].incorrect += 1;
 	}
 
 	function length() {
-		return quizData.length;
+		return quizData.questions.length;
 	}
 
 	function getHighScores() {
-		return highScores
+		return quizData.highScores
 	}
 
 	function updateHighScores(highScoreArrayFromController) {
-		highScoreFireData.set(highScoreArrayFromController);
+		quizData.highScores = highScoreArrayFromController;
 	}
 
 	return {

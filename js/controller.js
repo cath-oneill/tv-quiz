@@ -28,9 +28,9 @@ var Quizzy = (function() {
 		QuizzyUI.question(currentQ);
 	};
 
-	function startQuiz() {
-		QuizzyUI.start();
-		QuizzyData.load(function() {
+	function startQuiz(quizKey) {
+		QuizzyData.load(quizKey, function() {
+			QuizzyUI.start();
 			length = QuizzyData.length();
 			random = _.range(length);
 			shuffle(random);
