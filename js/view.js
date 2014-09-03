@@ -8,6 +8,7 @@ var QuizzyUI = (function(){
 		$img = $('<img>').attr('src', "images/wire_logo.jpg");
 		$logo.append($img);
 		$header.css('background', '#000201');
+		$header.show();
 	}
 
 	function CreateQuestionView(qObject) {
@@ -76,20 +77,11 @@ var QuizzyUI = (function(){
 		return name;
 	}
 
-	function start() {
-		createHeaderView();
-	}
-
-
 	return {
-		start: start,
+		header: createHeaderView,
 		question: CreateQuestionView,
 		feedback: CreateFeedbackView,
 		getUsername: getUsernameView,
 		end: FinalScoreView
 	}
-
-
-
-
 })();

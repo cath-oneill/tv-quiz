@@ -4,8 +4,7 @@
 }
 
 header {
-	margin: 0 0 40px 0;
-	height: 180px;
+	margin: 0 0 20px 0;
 }
 
 html, body {
@@ -18,4 +17,18 @@ html, body {
 
 #leaderboard {
 	margin-bottom: 20px;
+}
+
+#logo img {
+	max-width:100%;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
 }
