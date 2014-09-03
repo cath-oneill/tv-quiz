@@ -41,9 +41,7 @@ var QuizzyUI = (function(){
 			percent: percent
 		})
 		$view = $(compiledHTML);
-		$view.find('#next').on('click', function(){
-			Quizzy.next();
-		})
+		setTimeout(Quizzy.next, 2500);
 		$quizContainer.prepend($view);
 	}
 
