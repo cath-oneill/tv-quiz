@@ -30,7 +30,8 @@ var Quizzy = (function() {
 
 	function startQuiz(quizKey) {
 		QuizzyData.load(quizKey, function() {
-			QuizzyUI.header();
+			header = QuizzyData.header()
+			QuizzyUI.header(header);
 			length = QuizzyData.length();
 			random = _.range(length);
 			shuffle(random);

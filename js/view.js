@@ -1,13 +1,13 @@
 var QuizzyUI = (function(){
 	var $quizContainer = $('#quiz-app');
 
-	function createHeaderView() {
+	function createHeaderView(headerData) {
 		var $img,
 			$header = $('header'),
 			$logo = $('#logo'); 
-		$img = $('<img>').attr('src', "images/wire_logo.jpg");
+		$img = $('<img>').attr('src', headerData.image);
 		$logo.append($img);
-		$header.css('background', '#000201');
+		$header.css('background', headerData.backgroundColor);
 		$header.show();
 	}
 

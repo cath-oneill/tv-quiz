@@ -14,6 +14,10 @@ var QuizzyData = (function(){
 		});
 	}
 	
+	function getHeaderData() {
+		return quizData.header;
+	}
+	
 	function length() {
 		return quizData.questions.length;
 	}
@@ -50,6 +54,7 @@ var QuizzyData = (function(){
 	return {
 		current: getCurrentQ,
 		length: length,
+		header: getHeaderData,
 		correctAnswer: incrementCorrect,
 		incorrectAnswer: incrementIncorrect,
 		load: loadData,
