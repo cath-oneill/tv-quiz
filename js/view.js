@@ -46,15 +46,12 @@ var QuizzyUI = (function(){
 		$quizContainer.append($view);
 	}
 
-	function FinalScoreView(response, score, total, callback) {
+	function FinalScoreView(percentScore) {
 		var preppedTemplate, compiledHtml, $view;
-		console.log("final score", response, score, total)
 		$quizContainer.html("");
 		preppedTemplate = _.template(Templates.end);
 		compiledHTML = preppedTemplate({
-			feedback: response,
-			score: score,
-			total: total
+			percentScore: percentScore
 		})
 		$view = $(compiledHTML);
 		$quizContainer.append($view);	
@@ -65,7 +62,7 @@ var QuizzyUI = (function(){
 		var preppedTemplate, compiledHtml, $view;
 		preppedTemplate = _.template(Templates.leaderBoard);
 		compiledHTML = preppedTemplate({
-			highScores: highScores,
+			highScores: highScores
 		})
 		$view = $(compiledHTML);
 		$("#leaderboard").append($view).show();		
@@ -77,8 +74,8 @@ var QuizzyUI = (function(){
 		return name;
 	}
 
-	function end(response, score, total, highScores) {
-		FinalScoreView(response, score, total);
+	function end(percentScore, highScores) {
+		FinalScoreView(percentScore);
 		CreateLeaderboardView(highScores);
 	}
 

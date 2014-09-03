@@ -1,5 +1,3 @@
-
-
 var Quizzy = (function() {
 
 	var currentQ,
@@ -13,13 +11,13 @@ var Quizzy = (function() {
 		var response, total;
 		if (input === currentQ.answer) {
 			response = true;
-			score += 10;
+			score += 1;
 			QuizzyData.correctAnswer(random[currentIndex]);
 		} else {
 			response = false;
 			QuizzyData.incorrectAnswer(random[currentIndex]);
 		}
-		total = (currentIndex+ 1)*10;
+		total = currentIndex + 1;
 		percent = currentQ.correct * 100 / (currentQ.incorrect + currentQ.correct);
 		endOfTurn(response, score, total, percent);
 	};
@@ -61,12 +59,13 @@ var Quizzy = (function() {
 	function endOfTurn(response, score, total, percent) {
 		if (currentIndex + 1 === length) {
 			highScores = QuizzyData.getLeaderboard();
+			var percentScore = (score*100)/total;
 			if (score >= highScoreLimit()) {
 				user = QuizzyUI.getUsername();
 				addHighScore(user, score);
 			} 
 			QuizzyData.save();
-			QuizzyUI.end(response, score, total, highScores);
+			QuizzyUI.end(percentScore, highScores);
 		} else {
 			QuizzyUI.feedback(response, score, total, percent);
 		}

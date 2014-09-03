@@ -27,7 +27,7 @@ var Templates = (function(){
 
 	var finalScore = [
 		'<div class="row panel text-centered">',
-		'<h2 class="columns small-12">Your Final Score: <%= score %>%</h2>',
+		'<h2 class="columns small-12">Your Final Score: <%= percentScore %>%</h2>',
 		'</div>'
 	].join("\n")
 

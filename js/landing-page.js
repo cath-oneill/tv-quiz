@@ -6,7 +6,6 @@ var Landing = (function(){
 	function getLandingPageData(callback) {
 		landingFireData.on('value', function (snapshot) {
   			landingData = snapshot.val();
-  			console.log(landingData);
   			if(callback){callback();}
 		}, function (errorObject) {
   			console.log('The read failed: ' + errorObject.code);
@@ -21,17 +20,16 @@ var Landing = (function(){
 			landingData: landingData
 		});
 		var $view = $(compiledHtml);
+		$view.find('.start-quiz').on('click', function() {
+			selected = $(this).data('quiz');
+			Quizzy.start(selected);
+		});
 		$quizContainer.append($view);		
 	}
 
 
 	function start() {
-		console.log("started");
 		getLandingPageData(createLandingPage);
-		$('body').find('.start-quiz').on('click', function() {
-			selected = $(this).data('quiz');
-			Quizzy.start(selected);
-		});
 	};
 
 	start();
