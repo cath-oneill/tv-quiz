@@ -26,16 +26,23 @@ var Templates = (function(){
 	].join("\n");
 
 	var finalScore = [
-		'<div class="row panel text-centered">',
-		'<h2 class="columns small-12">Your Final Score: <%= percentScore %>%</h2>',
-		'</div>'
-	].join("\n")
+		'<div class="row">',
+			'<h2 class="columns small-12">Your Final Score: <%= percentScore %>%</h2>',
+		'</div>',
 
-	var leaderBoard = [
-		'<div class="columns small-12">',
-		'<% for (var i=0; i < highScores.length; i++) { %>',
-		'<p><%= highScores[i]["Username"] %> -- <%= highScores[i]["Score"] %>',
-		'<% } %>',
+		'<div class="row">',		
+			'<div class="columns small-12 medium-4 large-3">',
+			'<div id="leaderboard" class="panel row">',
+	        '<h4>LeaderBoard!</h4>',
+			'<% for (var i=0; i < highScores.length; i++) { %>',
+			'<p><%= highScores[i]["Username"] %> -- <%= highScores[i]["Score"] %>',
+			'<% } %>',
+			'</div>',
+			'</div>',
+
+			'<div class="columns small-12 medium-8 large-9">',
+			'<img src="<%= splashImage %>">',
+			'</div>',
 		'</div>'
 	].join("\n");
 
@@ -53,7 +60,6 @@ var Templates = (function(){
 		question: question,
 		feedback: feedback,
 		end: finalScore,
-		leaderBoard: leaderBoard,
 		lpGrid: landingPageGrid,
 		lpNav: landingPageNav
 	}

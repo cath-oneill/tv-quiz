@@ -65,7 +65,8 @@ var Quizzy = (function() {
 				addHighScore(user, score);
 			} 
 			QuizzyData.save();
-			QuizzyUI.end(percentScore, highScores);
+			splashImage = QuizzyData.splashImage();
+			QuizzyUI.end(percentScore, highScores, splashImage);
 		} else {
 			QuizzyUI.feedback(response, score, total, percent);
 		}

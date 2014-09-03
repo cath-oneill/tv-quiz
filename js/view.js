@@ -43,15 +43,17 @@ var QuizzyUI = (function(){
 		$view.find('#next').on('click', function(){
 			Quizzy.next();
 		})
-		$quizContainer.append($view);
+		$quizContainer.prepend($view);
 	}
 
-	function FinalScoreView(percentScore) {
+	function FinalScoreView(percentScore, highScores, splashImage) {
 		var preppedTemplate, compiledHtml, $view;
 		$quizContainer.html("");
 		preppedTemplate = _.template(Templates.end);
 		compiledHTML = preppedTemplate({
-			percentScore: percentScore
+			percentScore: percentScore,
+			highScores: highScores,
+			splashImage: splashImage
 		})
 		$view = $(compiledHTML);
 		$quizContainer.append($view);	
@@ -74,19 +76,9 @@ var QuizzyUI = (function(){
 		return name;
 	}
 
-	function end(percentScore, highScores) {
-		FinalScoreView(percentScore);
-		CreateLeaderboardView(highScores);
-	}
-
 	function start() {
 		createHeaderView();
 	}
-
-	$('#start').on('click', function() {
-		$('#startpage').hide();
-		Quizzy.start();
-	})
 
 
 	return {
@@ -94,7 +86,7 @@ var QuizzyUI = (function(){
 		question: CreateQuestionView,
 		feedback: CreateFeedbackView,
 		getUsername: getUsernameView,
-		end: end
+		end: FinalScoreView
 	}
 
 
