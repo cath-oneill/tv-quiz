@@ -56,8 +56,6 @@ var QuizzyUI = (function(){
 			splashImage: splashImage
 		})
 		$view = $(compiledHTML);
-		console.log($view);
-
 		$quizContainer.append($view);	
 	}
 
