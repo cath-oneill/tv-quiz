@@ -27,12 +27,14 @@ var Landing = (function(){
 		$quizContainer.append($view);		
 	}
 
-	function create() {
-		getLandingPageData(createLandingPage);
+	return {
+		create: function() {
+			getLandingPageData(createLandingPage);
+		}
 	}
 
-	create();
 
 })();
 	
 
+Landing.create();

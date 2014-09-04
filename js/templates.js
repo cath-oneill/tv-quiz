@@ -52,14 +52,11 @@ var Templates = (function(){
 		'</ul>'
 	].join('\n');
 
-	var landingPageNav = [].join('\n');
-
 	return {
 		question: question,
 		feedback: feedback,
 		end: finalScore,
 		lpGrid: landingPageGrid,
-		lpNav: landingPageNav
 	}
 
 })();

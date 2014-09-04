@@ -59,25 +59,27 @@ var Quizzy = (function() {
 
 	function endOfTurn(response, score, total, percent) {
 		if (currentIndex + 1 === length) {
-			highScores = QuizzyData.getLeaderboard();
-			var percentScore = (score*100)/total;
-			if (score >= highScoreLimit()) {
-				user = QuizzyUI.getUsername();
-				addHighScore(user, score);
-			} 
-			QuizzyData.save();
-			splashImage = QuizzyData.splashImage();
-			QuizzyUI.end(percentScore, highScores, splashImage);
+			QuizzyUI.feedback(response, score, total, percent, function(){
+				highScores = QuizzyData.getLeaderboard();
+				var percentScore = (score*100)/total;
+				if (score >= highScoreLimit()) {
+					user = QuizzyUI.getUsername();
+					addHighScore(user, score);
+				} 
+				QuizzyData.save();
+				splashImage = QuizzyData.splashImage();
+				QuizzyUI.end(percentScore, highScores, splashImage);
+			});
 		} else {
-			QuizzyUI.feedback(response, score, total, percent);
-		}
 
+		QuizzyUI.feedback(response, score, total, percent, Quizzy.nextQ);
+		}
 	}
 
 
 	return {
 		check: checkAnswer,
-		next: nextQuestion,
+		nextQ: nextQuestion,
 		start: startQuiz,
 	}
 

@@ -6,6 +6,7 @@ var QuizzyUI = (function(){
 			$header = $('header'),
 			$logo = $('#logo'); 
 		$img = $('<img>').attr('src', headerData.image);
+		$logo.html("");
 		$logo.append($img);
 		$header.css('background', headerData.backgroundColor);
 		$header.show();
@@ -30,9 +31,9 @@ var QuizzyUI = (function(){
 		$quizContainer.append($view);
 	}
 
-	function CreateFeedbackView(correct, score, total, percent) {
+	function CreateFeedbackView(correct, score, total, percent, callback) {
 		var message, preppedTemplate, compiledHTML, $view;
-		message = correct ? "Great job!" : "Wrong! Better get watching.";
+		message = (correct) ? "Great job!" : "Wrong! Better get watching.";
 		preppedTemplate = _.template(Templates.feedback);
 		compiledHTML = preppedTemplate({
 			feedback: message,
@@ -41,8 +42,8 @@ var QuizzyUI = (function(){
 			percent: percent
 		})
 		$view = $(compiledHTML);
-		setTimeout(Quizzy.next, 2500);
 		$quizContainer.prepend($view);
+		setTimeout(callback, 2500);
 	}
 
 	function FinalScoreView(percentScore, highScores, splashImage) {
@@ -55,6 +56,8 @@ var QuizzyUI = (function(){
 			splashImage: splashImage
 		})
 		$view = $(compiledHTML);
+		console.log($view);
+
 		$quizContainer.append($view);	
 	}
 
