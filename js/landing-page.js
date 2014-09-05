@@ -1,6 +1,7 @@
 var Landing = (function(){
 	var landingFireData = new Firebase("https://wirequiz.firebaseio.com/landing-data");
 	var landingData,
+		$quizAnchor = $('#quizAnchor'),		
 		$quizContainer = $('#quiz-app');
 
 	function getLandingPageData(callback) {

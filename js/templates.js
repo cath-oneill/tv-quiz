@@ -47,7 +47,7 @@ var Templates = (function(){
 	var landingPageGrid = [
 		'<ul class="small-block-grid-2 large-block-grid-4">',
 		'<% for (var i=0; i < landingData.length; i++) { %>',
-  		'<li class="start-quiz" data-quiz="<%= landingData[i]["key"] %>"><img src="<%= landingData[i]["image"] %>"></li>',
+  		'<li class="start-quiz" data-quiz="<%= landingData[i]["key"] %>"><a href="#quiz"><img src="<%= landingData[i]["image"] %>"></a></li>',
   		'<% } %>',
 		'</ul>'
 	].join('\n');

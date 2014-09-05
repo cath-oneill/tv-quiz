@@ -30,7 +30,7 @@ var Quizzy = (function() {
 
 	function startQuiz(quizKey) {
 		QuizzyData.load(quizKey, function() {
-			header = QuizzyData.header()
+			header = QuizzyData.header();
 			QuizzyUI.header(header);
 			length = QuizzyData.length();
 			random = _.range(length);
@@ -62,9 +62,9 @@ var Quizzy = (function() {
 			QuizzyUI.feedback(response, score, total, percent, function(){
 				highScores = QuizzyData.getLeaderboard();
 				var percentScore = (score*100)/total;
-				if (score >= highScoreLimit()) {
+				if (percentScore >= highScoreLimit()) {
 					user = QuizzyUI.getUsername();
-					addHighScore(user, score);
+					addHighScore(user, percentScore);
 				} 
 				QuizzyData.save();
 				splashImage = QuizzyData.splashImage();
